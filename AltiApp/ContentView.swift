@@ -16,10 +16,16 @@ struct ContentView: View {
     private let altimeter = CMAltimeter()
 
     var body: some View {
-        Text("Pressure: \(pressure) kpascals \nAltitude change: \(altitude) m")
-            .onAppear(perform: startAltimeterUpdates)
-            .onDisappear(perform: stopAltimeterUpdates)
+        VStack {
+            Text("Pressure: \(pressure) kpascals \nAltitude change: \(altitude) m")
+                .padding(.top, 10)
+                .onAppear(perform: startAltimeterUpdates)
+                .onDisappear(perform: stopAltimeterUpdates)
+            
+            Spacer()
+        }
     }
+
 
     func startAltimeterUpdates() {
         guard CMAltimeter.isRelativeAltitudeAvailable() else {
@@ -41,24 +47,3 @@ struct ContentView: View {
         altimeter.stopRelativeAltitudeUpdates()
     }
 }
-
-
-/*
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Altimeter data")
-        }
-        .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-*/
